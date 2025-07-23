@@ -1,9 +1,70 @@
 # 要件定義書との整合性更新サマリー
 
-## 更新日時
-2025-07-23
+## 更新履歴
 
-## 更新内容
+### 2025-07-23 (2回目更新)
+- TypeScript対応とドキュメント整理
+
+### 2025-07-23 (初回更新)
+- タイムアウト処理時間の統一
+- 欠格要件処理の継続判定
+- バッチ処理最適化
+
+---
+
+## 最新更新内容（2025-07-23 2回目）
+
+### 1. TypeScript開発フローへの完全移行
+
+#### 更新対象ファイル
+- **全TODOファイル**
+  - `/docs/todo/Project_TODO.md`
+  - `/docs/todo/Client_TODO.md`
+  - `/docs/todo/Server_TODO.md`
+  - 全ての .gs 拡張子を .ts に変更
+
+- **全テストファイル**
+  - `/docs/test/Project_Test.md`
+  - `/docs/test/Project_TestCase.md`
+  - `/docs/test/Project_Test_TODO.md`
+  - 全ての .gs 拡張子を .ts に変更
+
+#### 新規追加内容
+- `/docs/design/Project_design.md`
+  - セクション 9.2: TypeScript → JavaScript → GAS 変換規約
+    - import/export文を使用しない
+    - 名前空間パターンの採用
+    - ビルド設定（tsconfig.json）
+  - セクション 10.2: CI/CDパイプライン
+    - GitHub Actions設定
+    - 自動ビルド・デプロイフロー
+  - セクション 11: プロジェクトディレクトリ構造
+    - src/ts/ → src/js/ → src/gas/ のビルドフロー
+    - 詳細なディレクトリ構成
+
+### 2. ドキュメントの統合と削除
+
+#### 削除ファイル
+- `PROJECT_STRUCTURE.md` → Project_design.mdに統合
+- `docs/STRUCTURE.md` → 不要のため削除
+- `docs/design/System_Architecture.md` → Project_design.mdに統合
+
+#### 統合内容
+- `/docs/design/Project_design.md`
+  - システムアーキテクチャの詳細を統合
+  - プロジェクト構造の詳細を追加
+  - ドキュメント構成の整理
+
+### 3. トリガー時間の修正
+
+#### 更新対象ファイル
+- `/docs/design/Workflow_design.md`
+  - トリガー設定を7分後に統一（5分実行 + 2分の安全マージン）
+  - GAS実行時間の変動を考慮した安全な設計
+
+---
+
+## 初回更新内容（2025-07-23 初回）
 
 ### 1. タイムアウト処理時間の統一（5分30秒 → 5分）
 
