@@ -1,10 +1,10 @@
 # 入札公告要件判定システム - 開発仕様書
 
 ## 関連ドキュメント
-- **要件定義書**: `/要件定義書.md`
-- **マスター項目一覧**: `/別紙1：マスター項目一覧.md`
-- **判定詳細**: `/別紙2：入札公告要件判定詳細.md`
-- **補助シート**: `/別紙3：補助シート.md`
+- **要件定義書**: `/docs/requirements/要件定義書.md`
+- **マスター項目一覧**: `/docs/requirements/appendix/別紙1：マスター項目一覧.md`
+- **判定詳細**: `/docs/requirements/appendix/別紙2：入札公告要件判定詳細.md`
+- **補助シート**: `/docs/requirements/appendix/別紙3：補助シート.md`
 - **TODO リスト**: `/Project_TODO.md`
 - **テスト仕様**: `/Project_Test.md`
 

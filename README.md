@@ -44,14 +44,14 @@
 - **アーキテクチャ**: サーバー/クライアント分離型
 
 ## ドキュメント構成
-- **要件定義書.md**: システム要件と仕様の詳細
-- **別紙1：マスター項目一覧.md**: データベース定義
-- **別紙2：入札公告要件判定詳細.md**: 判定ロジックの詳細
-- **別紙3：補助シート.md**: 補助的なデータ定義
-- **Project_design.md**: システム設計書
-- **Project_TODO.md**: 開発タスク一覧
-- **Project_Test.md**: テスト仕様書
-- **Project_TestCase.md**: テストケース表
+- **docs/requirements/要件定義書.md**: システム要件と仕様の詳細
+- **docs/requirements/appendix/別紙1：マスター項目一覧.md**: データベース定義
+- **docs/requirements/appendix/別紙2：入札公告要件判定詳細.md**: 判定ロジックの詳細
+- **docs/requirements/appendix/別紙3：補助シート.md**: 補助的なデータ定義
+- **docs/design/Project_design.md**: システム設計書
+- **docs/todo/Project_TODO.md**: 開発タスク一覧
+- **docs/test/Project_Test.md**: テスト仕様書
+- **docs/test/Project_TestCase.md**: テストケース表
 
 ## 開発環境のセットアップ
 

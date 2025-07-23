@@ -2,8 +2,8 @@
 
 ## 関連ドキュメント
 - **全体設計書**: `/Project_design.md`
-- **要件定義書**: `/要件定義書.md`
-- **判定詳細**: `/別紙2：入札公告要件判定詳細.md`
+- **要件定義書**: `/docs/requirements/要件定義書.md`
+- **判定詳細**: `/docs/requirements/appendix/別紙2：入札公告要件判定詳細.md`
 - **TODO リスト**: `/docs/todo/Server_TODO.md`
 
 ---
@@ -33,9 +33,9 @@
 │           │                                                 │
 │           ▼                                                 │
 │  ┌─────────────────┐                                       │
-│  │ 欠格要件判定   │ → NG時は即終了                        │
+│  │ 欠格要件判定   │ → NGでも他の要件判定を継続          │
 │  └────────┬────────┘                                       │
-│           │ OK                                             │
+│           │                                                 │
 │           ▼                                                 │
 │  ┌─────────────────────────────────────┐                   │
 │  │    並列判定処理                    │                   │
@@ -81,7 +81,7 @@ class JudgmentEngine {
     
     // 判定順序の定義
     this.judgmentOrder = [
-      'disqualification',  // 欠格要件（必須・即終了）
+      'disqualification',  // 欠格要件（必須）
       'grade',            // 等級要件
       'region',           // 地域要件
       'achievement',      // 実績要件
@@ -111,14 +111,7 @@ class JudgmentEngine {
       const disqualificationResult = this.judges.disqualification
         .judge(context);
       
-      if (!disqualificationResult.qualified) {
-        return this.createDisqualifiedResult(
-          disqualificationResult, 
-          startTime
-        );
-      }
-      
-      // 4. その他要件の並列判定
+      // 4. その他要件の並列判定（欠格要件NGでも継続）
       const parallelResults = this.executeParallelJudgments(context);
       
       // 5. 結果統合
@@ -334,6 +327,120 @@ class DisqualificationJudge {
 
     return message;
   }
+}
+```
+
+### 3.2 欠格要件の一括判定処理
+
+欠格要件は企業単位で判定されるため、全ての欠格要件を一括でチェックし、結果を配列に格納してから書き込み処理を行います。
+
+```javascript
+/**
+ * 欠格要件一括判定
+ * @param {Array} companies - 企業リスト
+ * @param {Array} requirements - 欠格要件リスト
+ * @returns {Object} 判定結果
+ */
+function batchDisqualificationJudgment(companies, requirements) {
+  const results = {
+    sufficiencyList: [],  // 充足要件リスト
+    shortageList: []      // 不足要件リスト
+  };
+  
+  // 1. 全企業の欠格要件を一括チェック
+  for (const company of companies) {
+    const judge = new DisqualificationJudge();
+    const result = judge.judge({ company });
+    
+    // 2. 各欠格要件の結果を分類
+    for (const [flag, config] of Object.entries(judge.flagMappings)) {
+      const requirementResult = {
+        companyId: company.id,
+        requirementType: 'disqualification',
+        flag: flag,
+        timestamp: new Date()
+      };
+      
+      if (company[flag] === true) {
+        // 不足要件リストへ追加
+        results.shortageList.push({
+          ...requirementResult,
+          reason: config.message,
+          category: config.category
+        });
+      } else {
+        // 充足要件リストへ追加
+        results.sufficiencyList.push({
+          ...requirementResult,
+          status: 'OK'
+        });
+      }
+    }
+  }
+  
+  // 3. バッチ書き込み処理
+  writeBatchResults(results);
+  
+  // 4. 公告要件マスターの欠格要件に判定済みフラグを設定
+  markDisqualificationRequirementsAsJudged(requirements);
+  
+  return results;
+}
+
+/**
+ * バッチ結果書き込み
+ * @private
+ */
+function writeBatchResults(results) {
+  const BATCH_SIZE = 100;
+  
+  // 充足要件の書き込み
+  for (let i = 0; i < results.sufficiencyList.length; i += BATCH_SIZE) {
+    const batch = results.sufficiencyList.slice(i, i + BATCH_SIZE);
+    writeSufficiencyBatch(batch);
+    saveProgress('sufficiency', i + batch.length);
+  }
+  
+  // 不足要件の書き込み
+  for (let i = 0; i < results.shortageList.length; i += BATCH_SIZE) {
+    const batch = results.shortageList.slice(i, i + BATCH_SIZE);
+    writeShortageBatch(batch);
+    saveProgress('shortage', i + batch.length);
+  }
+}
+```
+
+### 3.3 中間テーブル最適化
+
+欠格要件に判定済みフラグを設定することで、要件拠点中間テーブル作成時に欠格要件を除外し、処理対象レコード数を大幅に削減します。
+
+```javascript
+/**
+ * 中間テーブル作成（最適化版）
+ * @param {Array} requirements - 公告要件リスト
+ * @param {Array} offices - 拠点リスト
+ * @returns {Array} 中間テーブルレコード
+ */
+function createOptimizedIntermediateTable(requirements, offices) {
+  // 判定済みフラグが立っていない要件のみを対象
+  const targetRequirements = requirements.filter(req => 
+    !req.judged_flag && req.requirement_type !== 'disqualification'
+  );
+  
+  const intermediateRecords = [];
+  
+  for (const requirement of targetRequirements) {
+    for (const office of offices) {
+      intermediateRecords.push({
+        requirement_id: requirement.id,
+        office_id: office.id,
+        requirement_type: requirement.requirement_type,
+        created_at: new Date()
+      });
+    }
+  }
+  
+  return intermediateRecords;
 }
 ```
 

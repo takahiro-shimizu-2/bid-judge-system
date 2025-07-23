@@ -315,7 +315,7 @@
     function handleTimeout() {
       // 現在の状態保存
       // 処理中断
-      // 再開トリガー設定
+      // 再開トリガー設定（1分後）
     }
 
 [ ] // 再開処理
@@ -334,7 +334,7 @@
 [ ] // タイムアウトチェック
     function checkExecutionTime(startTime) {
       // 経過時間計算
-      // 閾値（5分30秒）チェック
+      // 閾値（5分）チェック
     }
 ```
 
@@ -447,6 +447,8 @@
     function processJudgment(state) {
       // 公告×企業の組み合わせ作成
       // 欠格要件一括判定
+      // 判定済みフラグ設定
+      // 中間テーブル作成（判定済み要件を除外）
       // その他要件個別判定
       // 結果保存
     }
@@ -457,7 +459,16 @@
       const results = LibraryName.judgeDisqualificationBatch(
         companies
       );
+      // 充足/不足要件リストへの書き込み
+      // 判定済みフラグの設定
       return results;
+    }
+
+[ ] // 中間テーブル最適化作成
+    function createOptimizedIntermediateTable(requirements, offices) {
+      // 判定済みフラグが立っていない要件のみ抽出
+      // 要件×拠点の組み合わせ作成
+      // 中間テーブルへ書き込み
     }
 
 [ ] // 個別要件判定

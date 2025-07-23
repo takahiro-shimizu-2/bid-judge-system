@@ -1,9 +1,11 @@
 # 入札公告要件判定システム - 開発TODOリスト
 
 ## 関連ドキュメント
-- **設計書**: `/Project_design.md`
-- **要件定義書**: `/要件定義書.md`
-- **テスト仕様**: `/Project_Test.md`
+- **設計書**: `/docs/design/Project_design.md`
+- **要件定義書**: `/docs/requirements/要件定義書.md`
+- **テスト仕様**: `/docs/test/Project_Test.md`
+- **テストケース表**: `/docs/test/Project_TestCase.md`
+- **テスト実装TODO**: `/docs/test/Project_Test_TODO.md`
 
 ---
 
@@ -93,6 +95,9 @@
 - [ ] 結果管理
   - [ ] `saveJudgmentResult()`: 判定結果保存
   - [ ] `updateEvaluationMaster()`: 評価マスター更新
+- [ ] 中間テーブル管理
+  - [ ] `createOptimizedIntermediateTable()`: 最適化された中間テーブル作成
+  - [ ] `filterJudgedRequirements()`: 判定済み要件のフィルタリング
 
 #### 1.4.2 DisqualificationJudge.gs（欠格要件判定）
 - [ ] フラグチェック関数
@@ -108,6 +113,15 @@
 - [ ] 統合判定
   - [ ] `judgeDisqualification()`: 欠格要件統合判定
   - [ ] `createDisqualificationMessage()`: NGメッセージ生成
+- [ ] 一括処理
+  - [ ] `batchDisqualificationJudgment()`: 欠格要件一括判定
+  - [ ] `prepareBatchData()`: 判定結果を配列に格納
+  - [ ] `writeBatchResults()`: バッチ結果書き込み（100件単位）
+  - [ ] `saveWriteProgress()`: 書き込み進捗保存
+  - [ ] `resumeBatchWrite()`: 中断された書き込みの再開
+  - [ ] `writeSufficiencyDetails()`: 充足要件リストへの一括登録
+  - [ ] `writeShortageDetails()`: 不足要件リストへの一括登録
+  - [ ] `markDisqualificationRequirementsAsJudged()`: 判定済みフラグ設定
 
 #### 1.4.3 GradeJudge.gs（等級要件判定）
 - [ ] 等級チェック
@@ -220,12 +234,14 @@
 
 #### 2.3.3 TimeoutHandler.gs
 - [ ] タイムアウト処理
-  - [ ] `setTimeoutTrigger()`: トリガー設定
+  - [ ] `setTimeoutTrigger()`: トリガー設定（7分後）
+  - [ ] `checkElapsedTime()`: 経過時間チェック（5分で中断）
   - [ ] `handleTimeout()`: タイムアウト処理
   - [ ] `deleteTrigger()`: トリガー削除
 - [ ] 再開処理
   - [ ] `resumeFromCheckpoint()`: チェックポイントから再開
   - [ ] `validateCheckpoint()`: チェックポイント検証
+  - [ ] `restoreWriteProgress()`: 書き込み進捗の復元
 
 ### 2.4 レポート生成
 

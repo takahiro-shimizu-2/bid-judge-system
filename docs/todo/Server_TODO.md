@@ -325,8 +325,24 @@
     }
 
 [ ] // 一括判定最適化
-    function judgeDisqualificationBatch(companies) {
-      // 複数企業の一括判定
+    function judgeDisqualificationBatch(companies, requirements) {
+      // 全企業の判定結果を配列に格納
+      // 各企業について：
+      //   - 引っかかった要件 → 不足要件配列へ
+      //   - 引っかからなかった要件 → 充足要件配列へ
+      // バッチ書き込み準備
+    }
+
+[ ] // 判定結果の一括書き込み
+    function writeBatchJudgmentResults(results) {
+      // 100件単位でバッチ分割
+      // 書き込み進捗の保存
+      // 中断時の再開ポイント管理
+    }
+
+[ ] // 判定済みフラグの一括更新
+    function markRequirementsAsJudged(requirementIds) {
+      // T_BID_REQUIREMENTのevaluation_executed_flgを更新
     }
 ```
 

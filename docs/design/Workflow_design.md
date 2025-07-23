@@ -2,7 +2,7 @@
 
 ## 関連ドキュメント
 - **全体設計書**: `/Project_design.md`
-- **要件定義書**: `/要件定義書.md`
+- **要件定義書**: `/docs/requirements/要件定義書.md`
 - **TODO リスト**: `/docs/todo/Client_TODO.md`
 
 ---
@@ -297,7 +297,7 @@ class StateManager {
 ```javascript
 class TimeoutHandler {
   constructor() {
-    this.SAFE_EXECUTION_TIME = 330000; // 5分30秒（ミリ秒）
+    this.SAFE_EXECUTION_TIME = 300000; // 5分（ミリ秒）
     this.TRIGGER_DELAY = 60000; // 1分後に再実行
   }
 
@@ -575,7 +575,7 @@ class ProgressTracker {
 const WorkflowConfig = {
   // 実行設定
   execution: {
-    maxExecutionTime: 330000,      // 5.5分
+    maxExecutionTime: 300000,      // 5分
     triggerDelay: 60000,           // 1分
     maxRetries: 3,
     retryDelay: 30000              // 30秒
