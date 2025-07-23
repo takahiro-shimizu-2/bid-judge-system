@@ -55,7 +55,7 @@
 
 ## 2. 単体テスト実装 【優先度: 🟡】
 
-### 2.1 共通モジュールテスト (Utils.gs)
+### 2.1 共通モジュールテスト (Utils.ts)
 - [ ] `convertToHalfWidth()`関数テスト
   - [ ] T-UT-001: 全角英数字変換
   - [ ] T-UT-002: 全角スペース変換
@@ -67,7 +67,7 @@
   - [ ] T-UT-007: 月日のみパース
   - [ ] T-UT-008: 不正日付処理
 
-### 2.2 データアクセス層テスト (MasterDataAccess.gs)
+### 2.2 データアクセス層テスト (MasterDataAccess.ts)
 - [ ] `getCompanyById()`関数テスト
   - [ ] T-UT-011: 存在する企業ID検索
   - [ ] T-UT-012: 存在しない企業ID検索
@@ -78,25 +78,25 @@
   - [ ] T-UT-016: 複数欠格フラグ
 
 ### 2.3 判定エンジンテスト
-#### 欠格要件判定 (DisqualificationJudge.gs)
+#### 欠格要件判定 (DisqualificationJudge.ts)
 - [ ] `judgeDisqualification()`関数テスト
   - [ ] T-UT-017: 全条件クリア
   - [ ] T-UT-018: 単一欠格要件
   - [ ] T-UT-019: 複数欠格要件
 
-#### 等級要件判定 (GradeJudge.gs)
+#### 等級要件判定 (GradeJudge.ts)
 - [ ] `checkGradeRequirement()`関数テスト
   - [ ] T-UT-020: 等級要件一致
   - [ ] T-UT-021: 等級要件不足
   - [ ] T-UT-022: 以上条件判定
 
-#### 地域要件判定 (RegionJudge.gs)
+#### 地域要件判定 (RegionJudge.ts)
 - [ ] `checkRegionRequirement()`関数テスト
   - [ ] T-UT-023: 地域要件一致
   - [ ] T-UT-024: 地域要件不一致
   - [ ] T-UT-025: 複数拠点判定
 
-#### 実績要件判定 (AchievementJudge.gs)
+#### 実績要件判定 (AchievementJudge.ts)
 - [ ] `checkAchievementRequirement()`関数テスト
   - [ ] T-UT-026: 実績要件満足
   - [ ] T-UT-027: 実績要件不足

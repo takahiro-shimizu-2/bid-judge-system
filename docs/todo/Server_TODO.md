@@ -36,7 +36,7 @@
 
 ## 2. 共通モジュール開発
 
-### 2.1 Constants.gs（定数管理）
+### 2.1 Constants.ts（定数管理）
 ```javascript
 [ ] // スプレッドシートID定義
     const MASTER_SPREADSHEET_ID = 'xxx';
@@ -71,7 +71,7 @@
     };
 ```
 
-### 2.2 Utils.gs（ユーティリティ）
+### 2.2 Utils.ts（ユーティリティ）
 ```javascript
 [ ] // 文字列処理関数
     function convertToHalfWidth(str) {
@@ -103,7 +103,7 @@
     }
 ```
 
-### 2.3 Logger.gs（ログ管理）
+### 2.3 Logger.ts（ログ管理）
 ```javascript
 [ ] // ログレベル定義
     const LOG_LEVELS = {
@@ -140,7 +140,7 @@
 
 ## 3. データアクセス層
 
-### 3.1 MasterDataAccess.gs（基本機能）
+### 3.1 MasterDataAccess.ts（基本機能）
 ```javascript
 [ ] // マスターシート取得
     function getMasterSheet(sheetName) {
@@ -262,7 +262,7 @@
 
 ## 4. 判定エンジン実装
 
-### 4.1 JudgmentEngine.gs（メインエンジン）
+### 4.1 JudgmentEngine.ts（メインエンジン）
 ```javascript
 [ ] // エンジン初期化
     class JudgmentEngine {
@@ -298,7 +298,7 @@
     }
 ```
 
-### 4.2 DisqualificationJudge.gs（欠格要件）
+### 4.2 DisqualificationJudge.ts（欠格要件）
 ```javascript
 [ ] // 欠格要件判定メイン
     function judgeDisqualification(context) {
@@ -346,7 +346,7 @@
     }
 ```
 
-### 4.3 GradeJudge.gs（等級要件）
+### 4.3 GradeJudge.ts（等級要件）
 ```javascript
 [ ] // 等級要件判定メイン
     function judgeGrade(context) {
@@ -374,7 +374,7 @@
     }
 ```
 
-### 4.4 RegionJudge.gs（地域要件）
+### 4.4 RegionJudge.ts（地域要件）
 ```javascript
 [ ] // 地域要件判定メイン
     function judgeRegion(context) {
@@ -407,7 +407,7 @@
     };
 ```
 
-### 4.5 AchievementJudge.gs（実績要件）
+### 4.5 AchievementJudge.ts（実績要件）
 ```javascript
 [ ] // 実績要件判定メイン
     function judgeAchievement(context) {
@@ -441,7 +441,7 @@
     }
 ```
 
-### 4.6 EngineerJudge.gs（技術者要件）
+### 4.6 EngineerJudge.ts（技術者要件）
 ```javascript
 [ ] // 技術者要件判定メイン
     function judgeEngineer(context) {
@@ -479,7 +479,7 @@
 
 ## 5. 外部連携
 
-### 5.1 OCRConnector.gs
+### 5.1 OCRConnector.ts
 ```javascript
 [ ] // OCR API設定
     const OCR_CONFIG = {
@@ -521,7 +521,7 @@
     }
 ```
 
-### 5.2 LLMConnector.gs
+### 5.2 LLMConnector.ts
 ```javascript
 [ ] // LLM API設定
     const LLM_CONFIG = {
@@ -560,7 +560,7 @@
 
 ## 6. バッチ処理最適化
 
-### 6.1 BatchOptimizer.gs
+### 6.1 BatchOptimizer.ts
 ```javascript
 [ ] // 動的バッチサイズ決定
     function determineBatchSize(itemCount, avgProcessingTime) {
@@ -592,7 +592,7 @@
 
 ## 7. エラーハンドリング
 
-### 7.1 ErrorHandler.gs
+### 7.1 ErrorHandler.ts
 ```javascript
 [ ] // エラー分類
     function classifyError(error) {

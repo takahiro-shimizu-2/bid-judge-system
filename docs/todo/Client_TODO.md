@@ -44,7 +44,7 @@
 
 ## 2. UI実装
 
-### 2.1 UIManager.gs（メニュー管理）
+### 2.1 UIManager.ts（メニュー管理）
 ```javascript
 [ ] // スプレッドシート開始時処理
     function onOpen() {
@@ -143,7 +143,7 @@
 
 ## 3. データ管理
 
-### 3.1 DataManager.gs（データ読み書き）
+### 3.1 DataManager.ts（データ読み書き）
 ```javascript
 [ ] // 判定前公告読み込み
     function loadPreAnnouncements() {
@@ -175,7 +175,7 @@
     }
 ```
 
-### 3.2 DataValidator.gs（入力検証）
+### 3.2 DataValidator.ts（入力検証）
 ```javascript
 [ ] // 必須項目チェック
     function validateRequiredFields(data) {
@@ -217,7 +217,7 @@
 
 ## 4. ワークフロー制御
 
-### 4.1 MainController.gs（メイン制御）
+### 4.1 MainController.ts（メイン制御）
 ```javascript
 [ ] // ワークフロー実行エントリーポイント
     function executeWorkflow() {
@@ -268,7 +268,7 @@
     }
 ```
 
-### 4.2 StateManager.gs（状態管理）
+### 4.2 StateManager.ts（状態管理）
 ```javascript
 [ ] // 状態保存
     function saveState(state) {
@@ -302,7 +302,7 @@
     }
 ```
 
-### 4.3 TimeoutHandler.gs（タイムアウト処理）
+### 4.3 TimeoutHandler.ts（タイムアウト処理）
 ```javascript
 [ ] // タイムアウトトリガー設定
     function setTimeoutTrigger() {
@@ -496,7 +496,7 @@
 
 ## 6. レポート生成
 
-### 6.1 ReportGenerator.gs
+### 6.1 ReportGenerator.ts
 ```javascript
 [ ] // レポート生成メイン
     function generateReport() {

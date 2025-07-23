@@ -39,19 +39,43 @@
 
 ## 技術スタック
 - **プラットフォーム**: Google Apps Script (GAS)
+- **開発言語**: TypeScript（JavaScriptにトランスパイル）
 - **データストア**: Google Sheets
 - **外部連携**: OCR API, LLM API
 - **アーキテクチャ**: サーバー/クライアント分離型
+- **ビルドツール**: TypeScript Compiler, clasp
+- **CI/CD**: GitHub Actions
 
 ## ドキュメント構成
-- **docs/requirements/要件定義書.md**: システム要件と仕様の詳細
-- **docs/requirements/appendix/別紙1：マスター項目一覧.md**: データベース定義
-- **docs/requirements/appendix/別紙2：入札公告要件判定詳細.md**: 判定ロジックの詳細
-- **docs/requirements/appendix/別紙3：補助シート.md**: 補助的なデータ定義
-- **docs/design/Project_design.md**: システム設計書
-- **docs/todo/Project_TODO.md**: 開発タスク一覧
-- **docs/test/Project_Test.md**: テスト仕様書
-- **docs/test/Project_TestCase.md**: テストケース表
+
+### ディレクトリ構造
+```
+docs/
+├── design/                     # 設計関連ドキュメント
+│   ├── Project_design.md       # システム全体設計書（アーキテクチャ、ディレクトリ構造含む）
+│   ├── Judgment_design.md      # 判定エンジン詳細設計
+│   └── Workflow_design.md      # ワークフロー設計
+├── requirements/               # 要件定義関連
+│   ├── 要件定義書.md            # メイン要件定義書
+│   ├── 開発要望.md             # 開発要望まとめ
+│   └── appendix/              # 別紙・詳細仕様
+│       ├── 別紙1：マスター項目一覧.md      # データベース定義
+│       ├── 別紙2：入札公告要件判定詳細.md   # 判定ロジック詳細
+│       └── 別紙3：補助シート.md           # 補助資料
+├── test/                      # テスト関連
+│   ├── Project_Test.md        # テスト仕様書
+│   ├── Project_TestCase.md    # テストケース一覧
+│   └── Project_Test_TODO.md   # テスト実装TODO
+└── todo/                      # TODO管理
+    ├── Project_TODO.md        # プロジェクト全体TODO
+    ├── Server_TODO.md         # サーバー側実装TODO
+    └── Client_TODO.md         # クライアント側実装TODO
+```
+
+### ドキュメント参照順序
+1. **新規参加者向け**: 要件定義書.md → Project_design.md → Project_TODO.md
+2. **実装者向け**: Project_TODO.md → 各設計書（必要に応じて）
+3. **テスター向け**: Project_Test.md → Project_TestCase.md → Project_Test_TODO.md
 
 ## 開発環境のセットアップ
 
@@ -67,17 +91,34 @@
    cd bid-judge-system
    ```
 
-2. Google Apps Script プロジェクトの作成
+2. 依存関係のインストールとビルド
+   ```bash
+   npm install
+   npm run build  # TypeScriptをJavaScriptにコンパイル
+   ```
+
+3. Google Apps Script プロジェクトの作成
    - サーバー側プロジェクト（ライブラリ）
    - クライアント側プロジェクト
+   - claspでプロジェクトと連携
+   ```bash
+   clasp login
+   clasp create --type sheets --title "入札判定システム"
+   ```
 
-3. スプレッドシートの準備
+4. スプレッドシートの準備
    - マスターデータ用スプレッドシート
    - クライアント用スプレッドシート
 
-4. 環境設定
+5. 環境設定
    - スプレッドシートIDの設定
    - APIキーの設定（必要に応じて）
+   - .clasprc.jsonの設定
+
+6. デプロイ
+   ```bash
+   npm run deploy  # TypeScriptビルド → GASへアップロード
+   ```
 
 ## 使用方法
 
@@ -100,6 +141,9 @@
 - 関数: 単一責任の原則を遵守
 - 命名規則: camelCaseを使用
 - コメント: JSDoc形式で記載
+- 開発言語: TypeScriptで記述し、JavaScriptにトランスパイル
+- モジュール: import/export文は使用せず、名前空間パターンを使用
+- ビルド: `npm run build`でJavaScriptファイルを生成
 
 ### ブランチ戦略
 - `main`: 本番環境
